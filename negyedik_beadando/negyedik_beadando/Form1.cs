@@ -58,9 +58,8 @@ namespace negyedik_beadando
             
 
         }
-        private void CreateTable()
-        {
-            string[] headers = new string[] {
+
+        string[] headers = new string[] {
                 "Kód",
                  "Eladó",
                  "Oldal",
@@ -71,6 +70,10 @@ namespace negyedik_beadando
                  "Ár (mFt)",
                  "Négyzetméter ár (Ft/m2)"
             };
+
+        private void CreateTable()
+        {
+            
 
             for (int i = 0; i < headers.Length; i++)
             {
@@ -100,6 +103,31 @@ namespace negyedik_beadando
             xlSheet.get_Range(
             GetCell(2, 1),
             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+
+            FormatTable();
+        }
+
+        private void FormatTable()
+        {
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range tableRange = xlSheet.get_Range(GetCell(Flats.Count+1, 1), GetCell(1, headers.Length));
+            tableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range firstRowRange = xlSheet.get_Range(GetCell(2, 1), GetCell(Flats.Count+1, 1));
+            firstRowRange.Font.Bold = true;
+            firstRowRange.Interior.Color = Color.LightYellow;
+
+            Excel.Range lastRowRange = xlSheet.get_Range(GetCell(2, headers.Length), GetCell(Flats.Count + 1, headers.Length));
+            lastRowRange.Interior.Color = Color.LightGreen;
+            lastRowRange.NumberFormat = "0.00";
         }
 
         private string GetCell(int x, int y)
