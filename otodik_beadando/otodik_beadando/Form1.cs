@@ -1,4 +1,5 @@
-﻿using otodik_beadando.MnbServiceReference;
+﻿using otodik_beadando.Entities;
+using otodik_beadando.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,9 @@ namespace otodik_beadando
         {
             InitializeComponent();
             WebszolgaltatasMeghivas();
+
+            BindingList<RateData> rates = new BindingList<RateData>();
+            dataGridView1.DataSource = rates;
         }
 
         public void WebszolgaltatasMeghivas()
