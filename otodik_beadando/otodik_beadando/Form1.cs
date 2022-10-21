@@ -1,4 +1,5 @@
-﻿using System;
+﻿using otodik_beadando.MnbServiceReference;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,24 @@ namespace otodik_beadando
         public Form1()
         {
             InitializeComponent();
+            WebszolgaltatasMeghivas();
+        }
+
+        public void WebszolgaltatasMeghivas()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = "EUR",
+                startDate = "2020-01-01",
+                endDate = "2020-06-30",
+            };
+
+            var response = mnbService.GetExchangeRates(request);
+
+            var result = response.GetExchangeRatesResult;
+            
         }
     }
 }
