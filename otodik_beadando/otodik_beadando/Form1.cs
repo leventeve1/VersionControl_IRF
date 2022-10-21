@@ -9,21 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace otodik_beadando
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> rates = new BindingList<RateData>();
         public Form1()
         {
             InitializeComponent();
-            WebszolgaltatasMeghivas();
-
-            BindingList<RateData> rates = new BindingList<RateData>();
+            string result = WebszolgaltatasMeghivas();
+            
             dataGridView1.DataSource = rates;
+
+            XMLfeldolgozas(result);
         }
 
-        public void WebszolgaltatasMeghivas()
+        public string WebszolgaltatasMeghivas()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
@@ -37,7 +40,29 @@ namespace otodik_beadando
             var response = mnbService.GetExchangeRates(request);
 
             var result = response.GetExchangeRatesResult;
-            
+            return result;
+        }
+
+        public void XMLfeldolgozas(string result)
+        {
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var rate = new RateData();
+                
+                rates.Add(rate);
+
+                rate.Date = DateTime.Parse(element.GetAttribute("date"));
+
+                var childElement = (XmlElement)element.ChildNodes[0];
+                rate.Currency = element.GetAttribute("curr");
+
+                var unit = decimal.Parse(element.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0) rate.Value = value / unit;
+            }
         }
     }
 }
