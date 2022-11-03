@@ -22,6 +22,8 @@ namespace hatodik_beadando.Entities
         protected override void DrawImage(Graphics g)
         {
             g.FillRectangle(BoxColor, 0, 0, Width, Height);
+            g.FillRectangle(RibbonColor, Width/2-Width/5/2, 0, Width/5, Height);
+            g.FillRectangle(RibbonColor, 0, Width/2-Width/5/2, Width, Height/5);
         }
     }
 }

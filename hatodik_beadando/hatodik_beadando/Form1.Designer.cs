@@ -35,7 +35,10 @@
             this.button_car = new System.Windows.Forms.Button();
             this.button_ball = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button_color = new System.Windows.Forms.Button();
+            this.btn_colorBall = new System.Windows.Forms.Button();
+            this.button_present = new System.Windows.Forms.Button();
+            this.btn_colorPresent1 = new System.Windows.Forms.Button();
+            this.btn_colorPresent2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -89,22 +92,55 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Coming next:";
             // 
-            // button_color
+            // btn_colorBall
             // 
-            this.button_color.BackColor = System.Drawing.Color.Gold;
-            this.button_color.Location = new System.Drawing.Point(117, 113);
-            this.button_color.Name = "button_color";
-            this.button_color.Size = new System.Drawing.Size(101, 30);
-            this.button_color.TabIndex = 4;
-            this.button_color.UseVisualStyleBackColor = false;
-            this.button_color.Click += new System.EventHandler(this.button_color_Click);
+            this.btn_colorBall.BackColor = System.Drawing.Color.Gold;
+            this.btn_colorBall.Location = new System.Drawing.Point(117, 113);
+            this.btn_colorBall.Name = "btn_colorBall";
+            this.btn_colorBall.Size = new System.Drawing.Size(101, 30);
+            this.btn_colorBall.TabIndex = 4;
+            this.btn_colorBall.UseVisualStyleBackColor = false;
+            this.btn_colorBall.Click += new System.EventHandler(this.button_color_Click);
+            // 
+            // button_present
+            // 
+            this.button_present.Location = new System.Drawing.Point(225, 13);
+            this.button_present.Name = "button_present";
+            this.button_present.Size = new System.Drawing.Size(101, 84);
+            this.button_present.TabIndex = 5;
+            this.button_present.Text = "Present";
+            this.button_present.UseVisualStyleBackColor = true;
+            this.button_present.Click += new System.EventHandler(this.button_present_Click);
+            // 
+            // btn_colorPresent1
+            // 
+            this.btn_colorPresent1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btn_colorPresent1.Location = new System.Drawing.Point(225, 113);
+            this.btn_colorPresent1.Name = "btn_colorPresent1";
+            this.btn_colorPresent1.Size = new System.Drawing.Size(101, 30);
+            this.btn_colorPresent1.TabIndex = 6;
+            this.btn_colorPresent1.UseVisualStyleBackColor = false;
+            this.btn_colorPresent1.Click += new System.EventHandler(this.button_color_Click);
+            // 
+            // btn_colorPresent2
+            // 
+            this.btn_colorPresent2.BackColor = System.Drawing.Color.Red;
+            this.btn_colorPresent2.Location = new System.Drawing.Point(225, 149);
+            this.btn_colorPresent2.Name = "btn_colorPresent2";
+            this.btn_colorPresent2.Size = new System.Drawing.Size(101, 30);
+            this.btn_colorPresent2.TabIndex = 7;
+            this.btn_colorPresent2.UseVisualStyleBackColor = false;
+            this.btn_colorPresent2.Click += new System.EventHandler(this.button_color_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button_color);
+            this.Controls.Add(this.btn_colorPresent2);
+            this.Controls.Add(this.btn_colorPresent1);
+            this.Controls.Add(this.button_present);
+            this.Controls.Add(this.btn_colorBall);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_ball);
             this.Controls.Add(this.button_car);
@@ -124,7 +160,10 @@
         private System.Windows.Forms.Button button_car;
         private System.Windows.Forms.Button button_ball;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button_color;
+        private System.Windows.Forms.Button btn_colorBall;
+        private System.Windows.Forms.Button button_present;
+        private System.Windows.Forms.Button btn_colorPresent1;
+        private System.Windows.Forms.Button btn_colorPresent2;
     }
 }
 

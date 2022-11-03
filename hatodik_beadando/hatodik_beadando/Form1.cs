@@ -79,7 +79,15 @@ namespace hatodik_beadando
         {
             Factory = new BallFactory
             {
-                BallColor = button_color.BackColor
+                BallColor = btn_colorBall.BackColor
+            };
+        }
+        private void button_present_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                RibbonColor = btn_colorPresent1.BackColor,
+                BoxColor = btn_colorPresent2.BackColor
             };
         }
 
@@ -93,5 +101,7 @@ namespace hatodik_beadando
                 return;
             button.BackColor = colorPicker.Color;
         }
+
+        
     }
 }
