@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace hatodik_beadando.Entities
-{
-    internal class Ball : Label
+{   
+    public class Ball : Label
     {
         public Ball()
         {

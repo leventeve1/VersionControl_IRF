@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace hatodik_beadando.Entities
 {
-    internal class BallFactory
+    public class BallFactory
     {
-        public Ball CreateNew(){
-
+        public Ball CreateNew()
+        {
             return new Ball();
         }
     }
