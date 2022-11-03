@@ -1,4 +1,5 @@
-﻿using hatodik_beadando.Entities;
+﻿using hatodik_beadando.Abstractions;
+using hatodik_beadando.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,9 @@ namespace hatodik_beadando
 {
     public partial class Form1 : Form
     {
-        private List<Ball> _balls = new List<Ball>();
-        private BallFactory _factory;
-        public BallFactory Factory
+        private List<Toy> _toys = new List<Toy>();
+        private IToyFactory _factory;
+        public IToyFactory Factory
         {
             get { return _factory;}
             set { _factory = value;}
@@ -23,13 +24,13 @@ namespace hatodik_beadando
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
             var ball = Factory.CreateNew();
-            _balls.Add(ball);
+            _toys.Add(ball);
             ball.Left = -ball.Width;
             mainPanel.Controls.Add(ball);
         }
@@ -37,7 +38,7 @@ namespace hatodik_beadando
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var maxPosition = 0;
-            foreach (var ball in _balls)
+            foreach (var ball in _toys)
             {
                 ball.MoveToy();
                 if (ball.Left > maxPosition)
@@ -46,9 +47,9 @@ namespace hatodik_beadando
 
             if (maxPosition > 1000)
             {
-                var oldestBall = _balls[0];
+                var oldestBall = _toys[0];
                 mainPanel.Controls.Remove(oldestBall);
-                _balls.Remove(oldestBall);
+                _toys.Remove(oldestBall);
             }
         }
     }
