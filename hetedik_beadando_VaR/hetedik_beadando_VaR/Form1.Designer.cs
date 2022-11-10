@@ -41,17 +41,17 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(361, 315);
+            this.dataGridView1.Size = new System.Drawing.Size(377, 386);
             this.dataGridView1.TabIndex = 0;
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(380, 13);
+            this.dataGridView2.Location = new System.Drawing.Point(396, 13);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(321, 315);
+            this.dataGridView2.Size = new System.Drawing.Size(376, 386);
             this.dataGridView2.TabIndex = 1;
             // 
             // Form1
