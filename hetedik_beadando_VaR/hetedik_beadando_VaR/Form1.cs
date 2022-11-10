@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace hetedik_beadando_VaR
         PortfolioEntities context = new PortfolioEntities();
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
         List<Tick> Ticks;
+
+        List<decimal> Nyereségek = new List<decimal>();
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +27,7 @@ namespace hetedik_beadando_VaR
 
             CreatePortfolio();
 
-            List<decimal> Nyereségek = new List<decimal>();
+            
             int intervalum = 30;
             DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -35,6 +38,7 @@ namespace hetedik_beadando_VaR
                            - GetPortfolioValue(kezdőDátum.AddDays(i));
                 Nyereségek.Add(ny);
                 Console.WriteLine(i + " " + ny);
+                
             }
 
             var nyereségekRendezve = (from x in Nyereségek
@@ -65,6 +69,26 @@ namespace hetedik_beadando_VaR
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        public void buttonSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.DefaultExt = "txt";
+            if (sfd.ShowDialog()==DialogResult.OK)
+            {
+                StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8);
+                sw.WriteLine("Időszak;Nyereség");
+                int sorszam = 0;
+                foreach (var item in Nyereségek)
+                {
+                    sw.WriteLine($"{sorszam.ToString()};{item.ToString()}");
+                    sorszam++;
+                }
+                
+                sw.Close();
+            }
         }
     }
 }
