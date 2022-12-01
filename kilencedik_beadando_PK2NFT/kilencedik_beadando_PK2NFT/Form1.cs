@@ -27,12 +27,11 @@ namespace kilencedik_beadando_PK2NFT
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
 
-
             for (int year = 2005; year <= 2024; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
-                {
-                    // Ide jön a szimulációs lépés
+                { 
+                        SimStep(year, Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -101,6 +100,35 @@ namespace kilencedik_beadando_PK2NFT
                 }
             }
             return population;
+        }
+        private void SimStep(int year, Person person)
+        {
+            if (!person.IsAlive) return;
+
+            byte age = (byte)(year - person.BirthYear);
+
+            double pDeath = (from x in DeathProbabilities
+                             where x.Gender == person.Gender && x.Age == age
+                             select x.ChanceOfDeath).FirstOrDefault();
+
+            if (rng.NextDouble() <= pDeath)
+                person.IsAlive = false;
+
+            if (person.IsAlive && person.Gender == Gender.Female)
+            {
+                double pBirth = (from x in BirthProbabilities
+                                 where x.Age == age
+                                 select x.Chance).FirstOrDefault();
+
+                if (rng.NextDouble() <= pBirth)
+                {
+                    Person ujszulott = new Person();
+                    ujszulott.BirthYear = year;
+                    ujszulott.NbrOfChildren = 0;
+                    ujszulott.Gender = (Gender)(rng.Next(1, 3));
+                    Population.Add(ujszulott);
+                }
+            }
         }
     }
 }
