@@ -23,15 +23,23 @@ namespace kilencedik_beadando_PK2NFT
         {
             InitializeComponent();
 
-            Population = GetPopulation(@"C:\Temp\nép.csv");
+        }
+
+        private void Simulation()
+        {
+            Population = GetPopulation(textBox1.Text);
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
 
-            for (int year = 2005; year <= 2024; year++)
+            List<int> Years = new List<int>();
+            List<int> Males = new List<int>();
+            List<int> Females = new List<int>();
+
+            for (int year = 2005; year <= numericUpDown1.Value; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
-                { 
-                        SimStep(year, Population[i]);
+                {
+                    SimStep(year, Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -42,8 +50,16 @@ namespace kilencedik_beadando_PK2NFT
                                     select x).Count();
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+                
+                Years.Add(year);
+                Males.Add(nbrOfMales);
+                Females.Add(nbrOfFemales);
+
+                
             }
+            DisplayResults(Years, Males, Females);
         }
+
         public List<Person> GetPopulation(string csvpath)
         {
             List<Person> population = new List<Person>();
@@ -128,6 +144,30 @@ namespace kilencedik_beadando_PK2NFT
                     ujszulott.Gender = (Gender)(rng.Next(1, 3));
                     Population.Add(ujszulott);
                 }
+            }
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            Simulation();
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = "C:\\Temp";
+            if (ofd.ShowDialog()==DialogResult.OK)
+            {
+                textBox1.Text = ofd.FileName;
+            }
+        }
+
+        private void DisplayResults(List<int> Years, List<int> Males, List<int> Females)
+        {
+            for (int i = 0; i < Years.Count; i++)
+            {
+                richTextBox1.Text += $"Szimulációs év: {Years[i]}\n\tFiúk: {Males[i]}\n\tLányok: {Females[i]}\n\n";
             }
         }
     }
